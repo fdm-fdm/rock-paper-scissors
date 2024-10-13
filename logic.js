@@ -80,12 +80,6 @@ function playGame() {
     }
 }
 
-function returnWinner(humanChoice, computerChoice) {
-    if (humanChoice = computerChoice) {
-        console.log("This is a draw!")
-    }
-}
-
 
 
 
