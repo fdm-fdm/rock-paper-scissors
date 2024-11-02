@@ -1,0 +1,64 @@
+/* style.css */
+
+/* importing Roboto font from Google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* div { border: 1px solid black; } */
+
+html, body {
+    font-family: Roboto;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
+}
+
+button {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90vw; /* 90% of the viewport width */
+    max-width: 1000px; /* Prevents it from growing larger than 1000px */ 
+}
+
+#score-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+#displayHumanScore, #displayComputerScore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 150px;
+    height: 100px;
+    background-color: aqua;
+}
+
+#button-wrapper {
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#choiceUser, #choiceCPU, #result {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 100px;
+    border-radius: 10px;
+    background-color: aqua;
+}

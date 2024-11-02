@@ -1,30 +1,36 @@
 let humanScore = 0;
 let computerScore = 0;
-playGame();
+let humanChoice;
+
+console.log("logic.js is loaded");
+document.getElementById("displayHumanScore").textContent = "User: " + humanScore;
+document.getElementById("displayComputerScore").textContent = "CPU: " + computerScore;
+
+getHumanChoice();
+
+function getHumanChoice() {
+    const rockButton = document.querySelector("#rock");
+    rockButton.addEventListener("click", () => {
+        humanChoice = 0;
+        playRound(humanChoice);
+    });
+    
+    const paperButton = document.querySelector("#paper");
+    paperButton.addEventListener("click", () => {
+        humanChoice = 1;
+        playRound(humanChoice);
+    });
+    
+    const scissorsButton = document.querySelector("#scissors");
+    scissorsButton.addEventListener("click", () => {
+        humanChoice = 2;
+        playRound(humanChoice);
+    });
+}
 
 function getComputerChoice() {
     let computerChoice = Math.floor((Math.random()*3)); //generate a random number between 0,1,2
     return computerChoice;
-}
-
-function getHumanChoice() {
-    let humanChoice = prompt("Please, choose between Rock, Paper and Scissors: ");
-    
-    if (humanChoice.toLowerCase() === "rock") {
-        return 0;
-    }
-
-    else if (humanChoice.toLowerCase() === "paper") {
-        return 1;
-    }
-
-    else if (humanChoice.toLowerCase() === "scissors") {
-        return 2;
-    }
-
-    else {
-        alert("Your selection is not allowed. Choose between Rock, Paper, Scissors.");
-    }
 }
 
 function numberToStringChoice(num_choice) {    
@@ -40,45 +46,48 @@ function numberToStringChoice(num_choice) {
         case 2:
             choice = "Scissors";
             break;
-        default:
-            choice = "Choice is not valid - CPU will get the round."
     }
 
     return choice;        
 }
 
-function playRound(){;
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
+function disableButtons() {
 
-    console.log('Human choice is: ' +numberToStringChoice(humanChoice));
-    console.log('Computer choice is: ' +numberToStringChoice(computerChoice));
+    document.getElementById("rock").disabled = true;
+    document.getElementById("paper").disabled = true;
+    document.getElementById("scissors").disabled = true;
+
+}
 
 
-    if (humanChoice == computerChoice)
-        console.log("This is a tie!")
-
-    else if (humanChoice == 0 && computerChoice == 2 || humanChoice == 1 && computerChoice == 0 || humanChoice == 2 && computerChoice == 1) {
-        console.log("Human wins!")
-        humanScore++;
-    }
+function playRound(humanChoice){;
     
+    if (humanScore < 5 && computerScore < 5) {
+        document.getElementById("choiceUser").textContent = "User choice: " + numberToStringChoice(humanChoice);
+        const computerChoice = getComputerChoice();
+        document.getElementById("choiceCPU").textContent = "CPU choice: " + numberToStringChoice(computerChoice);
+
+        if (humanChoice == computerChoice)
+            document.getElementById("result").textContent = "This is a tie!";
+
+        else if (humanChoice == 0 && computerChoice == 2 || humanChoice == 1 && computerChoice == 0 || humanChoice == 2 && computerChoice == 1) {
+            document.getElementById("result").textContent = "Human wins!";
+            humanScore++;
+            document.getElementById("displayHumanScore").textContent = "User: " + humanScore;
+        }
+        
+        else {
+            document.getElementById("result").textContent = "Computer Wins!";
+            computerScore++;
+            document.getElementById("displayComputerScore").textContent = "CPU: " + computerScore;
+        }
+    }
+
     else {
-        console.log("Computer Wins!");
-        computerScore++;
+        disableButtons(); // Disable the buttons
+        document.getElementById("result").textContent += " Game Over!";
     }
-}
-
-function playGame() {
-    for (round = 0; round < 5; round++) {
-        console.log("Round: " +(round + 1))
-        playRound();
-        console.log("Human Score: " +humanScore)
-        console.log("Computer Score: " +computerScore)
-        console.log("*---------------------------------------------------------------*");
-
-    }
-}
+}   
 
 
 
